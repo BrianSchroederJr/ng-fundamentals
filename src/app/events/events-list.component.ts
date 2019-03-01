@@ -6,7 +6,12 @@ import { Component } from '@angular/core';
   <div>
   <h1>Upcoming Angular Events</h1>
   <hr>
-  <event-thumbnail *ngFor="let anEvent of events" [event]="anEvent"></event-thumbnail>
+  <div class="row">
+    <div *ngFor="let anEvent of events" class="col-md-5">
+      <event-thumbnail [event]="anEvent"></event-thumbnail>
+    </div>
+  </div>
+
   </div>
   `
 })
@@ -97,11 +102,7 @@ export class EventsListComponent {
       time: '9:00 am',
       price: 950.00,
       imageUrl: '/assets/images/ng-nl.png',
-      location: {
-        address: 'The NG-NL Convention Center & Scuba Shop',
-        city: 'Amsterdam',
-        country: 'Netherlands'
-      },
+      onlineUrl: 'http://ng-nl.org',
       sessions: [
         {
           id: 1,
