@@ -3,12 +3,12 @@
 <div class="col-md-4">
   <form #loginForm="ngForm" (ngSubmit)="login(loginForm.value)" autocomplete="off" novalidate>
     <div class="form-group" >
-      <em *ngIf="loginForm.controls.userName?.invalid && (loginForm.controls.userName?.touched || mouseoverLogin)">Required</em>
+      <em *ngIf="loginForm?.controls.userName?.invalid && (loginForm?.controls.userName?.touched || mouseoverLogin)">Required</em>
       <label for="userName">User Name:</label>
       <input required (ngModel)="userName" name="userName" id="userName" type="text" class="form-control" placeholder="User Name..."  />
     </div>
     <div class="form-group" >
-        <em *ngIf="loginForm.controls.password?.invalid && (loginForm.controls.password?.touched || mouseoverLogin)">Required</em>
+        <em *ngIf="loginForm?.controls.password?.invalid && (loginForm?.controls.password?.touched || mouseoverLogin)">Required</em>
       <label for="password">Password:</label>
       <input required (ngModel)="password" name="password" id="password" type="password" class="form-control" placeholder="Password..."  />
     </div>
