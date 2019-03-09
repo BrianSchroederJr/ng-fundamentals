@@ -6,8 +6,8 @@ import { IEvent } from './shared/index';
   selector: 'event-thumbnail',
   template: `
   <div [routerLink]="['/events', event.id]" class="well hoverwell thumbnail">
-    <h2>{{event?.name}}</h2>
-    <div>Date: {{event?.date}}</div>
+    <h2>{{event?.name | uppercase}}</h2>
+    <div>Date: {{event?.date | date:'shortDate'}}</div>
     <!-- ngClass is used when multiple classes need to be added based on some logic test.
          ngStyle is used when multiple style elements need to be added or changed based on some logic tests.
     -->
@@ -26,7 +26,7 @@ import { IEvent } from './shared/index';
       <span *ngSwitchCase="'10:00 am'">(Late Start)</span>
       <span *ngSwitchDefault>(Normal Start)</span>
     </div>
-    <div>Price: \${{event?.price}}</div>
+    <div>Price: {{event?.price | currency:'USD'}}</div>
     <div [hidden]="!event?.location">     <!-- Hide elements if they may be displayed later -->
       <span>Location: {{event?.location?.address}}</span>
       <span class="pad-left">{{event?.location?.city}}, {{event?.location?.country}}</span>
