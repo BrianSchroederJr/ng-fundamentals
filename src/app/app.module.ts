@@ -11,6 +11,7 @@ import {
   EventListResolver,
   CreateSessionComponent,
   SessionListComponent,
+  DurationPipe,
 } from './events/index';
 
 import { EventsAppComponent } from './events-app.component';
@@ -43,6 +44,7 @@ import { CollapsibleWell2Component } from './common/collapsible-well2.component'
     SessionListComponent,
     CollapsibleWellComponent,
     CollapsibleWell2Component,
+    DurationPipe,
   ],
   providers: [
     EventService,
