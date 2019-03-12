@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
-import { IEvent } from './event.model';
+import { IEvent, ISession } from './event.model';
+
 
 @Injectable()
 export class EventService {
@@ -25,6 +26,21 @@ export class EventService {
     let index = EVENTS.findIndex(x => x.id = event.id);
     EVENTS[index] = event;
   }
+
+  searchSessions(searchTerm: string) {
+    var term = searchTerm.toLocaleLowerCase();
+    var results: ISession[] = [];
+    EVENTS.forEach(event => {
+      var matchingSessions = event.sessions.filter(s => s.name.toLocaleLowerCase().indexOf(term) > -1); // Search sessions in each event for a name that contains the search term
+      matchingSessions = matchingSessions.map((session: any) => { session.eventId = event.id; return session; }); //This is a quick way to add the event.id into the sessions which don't currently contain the event.id.  By using any you can add whatever you want to an object.
+      results = results.concat(matchingSessions); // Add matching sessions into results array.
+    });
+
+    var emitter = new EventEmitter(true); // true here tells the EventEmitter to return the Observable asynchronously
+    setTimeout(() => { emitter.emit(results); }, 100);
+    return emitter;
+  }
+
 }
 
 const EVENTS: IEvent[] = [
