@@ -21,7 +21,7 @@ export class NavbarComponent implements OnInit {
   constructor(public authService: AuthService, private eventService: EventService) {}
 
   searchSessions(searchTerm) {
-    this.eventService.searchSessions(searchTerm).subscribe(data => { this.foundSessions = data; console.log(this.foundSessions); });
+    this.eventService.searchSessions(searchTerm).subscribe(data => { this.foundSessions = data; });
 
   }
 
