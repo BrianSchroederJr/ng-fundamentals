@@ -8,7 +8,7 @@ import { IEvent } from './shared/index';
   selector: 'events-list',
   template: `
   <div>
-  <h1>-- Upcoming Angular Events --</h1>
+  <h1>- Upcoming Angular Events -</h1>
   <hr>
   <div class="row">
     <div *ngFor="let anEvent of eventsAry" class="col-md-5">
