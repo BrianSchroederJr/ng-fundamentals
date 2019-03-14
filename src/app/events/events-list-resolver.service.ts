@@ -7,7 +7,9 @@ import { map } from 'rxjs/operators';
 @Injectable()
 export class EventListResolver implements Resolve<any> {
   constructor(private eventService: EventService) {}
+
+  // Resolvers .subscribe to themselves.  That is why this works without .subscribe
   resolve() {
-    return this.eventService.getEvents().pipe(map(events => events));
+    return this.eventService.getEvents(); // .pipe(map(events => events));
   }
 }
