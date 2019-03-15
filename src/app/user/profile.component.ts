@@ -40,10 +40,17 @@ export class ProfileComponent implements OnInit {
   saveProfile(formValues) {
     // Only save profile if the Reactive profile Form is valid
     if (this.profileForm.valid) {
-      this.authService.updateCurrentUser(formValues.firstName, formValues.lastName);
+      this.authService.updateCurrentUser(formValues.firstName, formValues.lastName)
+      .subscribe(() => {
+        this.toastr.success('Profile saved.');
+      });
       //this.router.navigate(['events']);
-      this.toastr.success('Profile saved.');
+      //this.toastr.success('Profile saved.');
     }
+  }
+
+  logout() {
+    this.authService.logout().subscribe(() => { this.router.navigate(['/user/login']); });
   }
 
   validateFirstName() {
