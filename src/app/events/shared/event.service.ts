@@ -1,7 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Subject, Observable, of } from 'rxjs';
 import { IEvent, ISession } from './event.model';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 
 
@@ -17,8 +17,42 @@ export class EventService {
     return this.http.get<IEvent[]>('/api/events').pipe(catchError(this.handleError<IEvent[]>('getEvents', [])));
   }
 
-  getEvent(id: number): IEvent {
-    return EVENTS.find(data => data.id === id);
+  // getEvent(id: number): IEvent {
+  //   return EVENTS.find(data => data.id === id);
+  // }
+
+  getEvent(id: number): Observable<IEvent> {
+    return this.http.get<IEvent>('/api/events/' + id).pipe(catchError(this.handleError<IEvent>('getEvent')));
+  }
+
+
+
+  saveEvent(event) {
+    let options = { headers: new HttpHeaders({'Content-Type': 'application/json'}) };
+    return this.http.post<IEvent>('/api/events', event, options).pipe(catchError(this.handleError<IEvent>('saveEvent')));
+    // event.id = 999;
+    // event.session = [];
+    // EVENTS.push(event);
+  }
+
+  // updateEvent(event) {
+  //   let index = EVENTS.findIndex(x => x.id = event.id);
+  //   EVENTS[index] = event;
+  // }
+
+  searchSessions(searchTerm: string): Observable<ISession[]> {
+    return this.http.get<ISession[]>('/api/sessions/search?search=' + searchTerm).pipe(catchError(this.handleError<ISession[]>('searchSessions')));
+  //   var term = searchTerm.toLocaleLowerCase();
+  //   var results: ISession[] = [];
+  //   EVENTS.forEach(event => {
+  //     var matchingSessions = event.sessions.filter(s => s.name.toLocaleLowerCase().indexOf(term) > -1); // Search sessions in each event for a name that contains the search term
+  //     matchingSessions = matchingSessions.map((session: any) => { session.eventId = event.id; return session; }); //This is a quick way to add the event.id into the sessions which don't currently contain the event.id.  By using any you can add whatever you want to an object.
+  //     results = results.concat(matchingSessions); // Add matching sessions into results array.
+  //   });
+
+  //   var emitter = new EventEmitter(true); // true here tells the EventEmitter to return the Observable asynchronously
+  //   setTimeout(() => { emitter.emit(results); }, 100);
+  //   return emitter;
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
@@ -28,34 +62,9 @@ export class EventService {
     };
   }
 
-  saveEvent(event) {
-    event.id = 999;
-    event.session = [];
-    EVENTS.push(event);
-  }
-
-  updateEvent(event) {
-    let index = EVENTS.findIndex(x => x.id = event.id);
-    EVENTS[index] = event;
-  }
-
-  searchSessions(searchTerm: string) {
-    var term = searchTerm.toLocaleLowerCase();
-    var results: ISession[] = [];
-    EVENTS.forEach(event => {
-      var matchingSessions = event.sessions.filter(s => s.name.toLocaleLowerCase().indexOf(term) > -1); // Search sessions in each event for a name that contains the search term
-      matchingSessions = matchingSessions.map((session: any) => { session.eventId = event.id; return session; }); //This is a quick way to add the event.id into the sessions which don't currently contain the event.id.  By using any you can add whatever you want to an object.
-      results = results.concat(matchingSessions); // Add matching sessions into results array.
-    });
-
-    var emitter = new EventEmitter(true); // true here tells the EventEmitter to return the Observable asynchronously
-    setTimeout(() => { emitter.emit(results); }, 100);
-    return emitter;
-  }
-
 }
 
-const EVENTS: IEvent[] = [
+/*const EVENTS: IEvent[] = [
   {
     id: 1,
     name: 'Angular Connect',
@@ -361,7 +370,4 @@ const EVENTS: IEvent[] = [
     ]
   }
 ];
-
-
-
-
+*/
