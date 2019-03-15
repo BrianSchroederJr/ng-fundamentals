@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
-import { Resolve } from '@angular/router';
+import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
 import { EventService } from './shared/event.service';
 import { map } from 'rxjs/operators';
 
 
 @Injectable()
-export class EventListResolver implements Resolve<any> {
+export class EventResolver implements Resolve<any> {
   constructor(private eventService: EventService) {}
 
   // Resolvers .subscribe to themselves.  That is why this works without .subscribe
-  resolve() {
-    return this.eventService.getEvents(); // .pipe(map(events => events));
+  resolve(route: ActivatedRouteSnapshot) {
+    return this.eventService.getEvent(route.params['id']); // .pipe(map(events => events));
   }
 }

@@ -1,5 +1,10 @@
 ## This project follows the Angular Fundamentals course on Pluralsight by Jim Cooper & Joe Eames.
 
+To run HTTP parts of program: 
+1.)  open 2 different terminal windows
+2.)  npm run server   -on first window (runs: node node_modules/ngf-server/server.js )
+3.)  npm start        -on second window (runs: ng serve -o --proxy-config proxy.conf.json )
+
 # NgFundamentals
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.3.
