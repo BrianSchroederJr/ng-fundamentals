@@ -8,6 +8,16 @@ To run HTTP parts of program:
 
 3.)  npm start        -on second window (runs: ng serve -o --proxy-config proxy.conf.json )
 
+OR
+
+Using the backend server provided by the course creators we can serve the data and the web page:
+
+1.) open a terminal window
+
+2.) npm run server
+
+3.) open a browser to: localhost:8808 (project must be in C:\Users\bschroeder\Documents\Visual Studio Code\Projects\ng-fundamentals\dist)
+
 
 # NgFundamentals
 
